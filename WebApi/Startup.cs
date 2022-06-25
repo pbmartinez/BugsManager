@@ -50,13 +50,13 @@ namespace WebApi
                 });
             });
 
-            //Application Core Services Configuration
-            //services.AddAutoMapperWithProfiles();
+            
             //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapperWithProfiles();
             services.AddEntitiesServicesAndRepositories();
             services.AddCustomApplicationServices();
 
-            //Unit of Work Implementation Configuration
+            //Unit of Work Concrete Implementation Configuration
             services.AddDbContext<UnitOfWorkContainer>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(AppSettings.DefaultConnectionString), sqlServerOptions =>
                 {

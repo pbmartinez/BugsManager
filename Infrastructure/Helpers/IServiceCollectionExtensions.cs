@@ -33,16 +33,14 @@ namespace Infrastructure.DependencyInjectionExtensions
         public static void AddAutoMapperWithProfiles(this IServiceCollection services)
         {
             services.AddAutoMapper(
-            //    configuration =>
-            //{
-            //    configuration.AddExpressionMapping();
-            //    configuration.AddProfile<BugProfile>();
-            //    configuration.AddProfile<ProjectProfile>();
-            //    configuration.AddProfile<UserProfile>();
-            //    AppDomain.CurrentDomain.GetAssemblies();
-
-            //}
-            );
+                configuration =>
+                {
+                    configuration.AddExpressionMapping();
+                    configuration.AddProfile<BugProfile>();
+                    configuration.AddProfile<ProjectProfile>();
+                    configuration.AddProfile<UserProfile>();
+                },
+                AppDomain.CurrentDomain.GetAssemblies());
         }
         /// <summary>
         /// Adds Unit of Work, AppServices and Repositories.
