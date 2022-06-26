@@ -9,7 +9,7 @@ namespace WebApi.Controllers
 {
     [Route("user")]
     [ApiController]
-    public class UserController : ApiBaseController<UserDto>
+    public class UserController : ApiBaseController<UserDto, int>
     {
         public UserController(IUserAppService appService, ILogger<UserController> logger, IPropertyCheckerService propertyCheckerService) : base(appService, logger, propertyCheckerService)
         {

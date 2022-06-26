@@ -11,13 +11,15 @@ using System.Threading.Tasks;
 namespace Application.Specifications
 {
     //Miningfull name that denotes the specification
-    public class AllUserSpecification : Specification<UserDto>
+    public class AllBugsSpecification : Specification<BugDto>
     {
-        public AllUserSpecification(IMapper mapper) : base(mapper)
+
+        public AllBugsSpecification(IMapper mapper) : base(mapper)
         {
+
         }
         //Expression that defines the predicate that object of type(EntityDto) must comply to fullfill the specification
-        public override Expression<Func<UserDto, bool>> ToExpression()
+        public override Expression<Func<BugDto, bool>> ToExpression()
         {
             return e => true;
         }

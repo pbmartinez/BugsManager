@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Infrastructure.Helpers;
 
 namespace Infrastructure.Domain.UnitOfWork
 {
@@ -93,10 +94,16 @@ namespace Infrastructure.Domain.UnitOfWork
             return await Database.ExecuteSqlCommandAsync(sqlCommand, parameters);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Bug>()
+                .Property(b => b.CreationDate)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Seed();
+        }
 
-        //public virtual DbSet<Gateway> Gateway { get; set; }
-        //public virtual DbSet<Peripheral> Peripheral { get; set; }
-        //public virtual DbSet<Brand> Brand { get; set; }
-        //public virtual DbSet<Provider> Provider { get; set; }
+        public virtual DbSet<Bug> Bugs { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

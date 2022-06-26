@@ -70,7 +70,7 @@ namespace Infrastructure.Application.AppServices
         }
 
         
-        public UserDto Get(Guid id, List<string> includes = null)
+        public UserDto Get(int id, List<string> includes = null)
         {
             return _mapper.Map<UserDto>(_UserRepository.Get(id, includes));
         }
@@ -82,12 +82,12 @@ namespace Infrastructure.Application.AppServices
             return dtoItems;
         }
 
-        public async Task<UserDto> GetAsync(Guid id, List<string> includes = null)
+        public async Task<UserDto> GetAsync(int id, List<string> includes = null)
         {
             return _mapper.Map<UserDto>(await _UserRepository.GetAsync(id, includes));
         }
 
-        public async Task<bool> RemoveAsync(Guid id)
+        public async Task<bool> RemoveAsync(int id)
         {
             var item = await _UserRepository.GetAsync(id);
             await _UserRepository.DeleteAsync(item);

@@ -70,7 +70,7 @@ namespace Infrastructure.Application.AppServices
         }
 
         
-        public BugDto Get(Guid id, List<string> includes = null)
+        public BugDto Get(int id, List<string> includes = null)
         {
             return _mapper.Map<BugDto>(_BugRepository.Get(id, includes));
         }
@@ -82,12 +82,12 @@ namespace Infrastructure.Application.AppServices
             return dtoItems;
         }
 
-        public async Task<BugDto> GetAsync(Guid id, List<string> includes = null)
+        public async Task<BugDto> GetAsync(int id, List<string> includes = null)
         {
             return _mapper.Map<BugDto>(await _BugRepository.GetAsync(id, includes));
         }
 
-        public async Task<bool> RemoveAsync(Guid id)
+        public async Task<bool> RemoveAsync(int id)
         {
             var item = await _BugRepository.GetAsync(id);
             await _BugRepository.DeleteAsync(item);

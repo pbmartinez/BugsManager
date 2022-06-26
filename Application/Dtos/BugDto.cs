@@ -1,7 +1,11 @@
 ﻿using Domain.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Text.Json.Serialization;
+
 
 namespace Application.Dtos
 {
@@ -12,19 +16,20 @@ namespace Application.Dtos
             CreationDate = DateTime.UtcNow;
         }
 
-        //Max 100
+        [Required]
+        [MaxLength(100)]
         public string Description { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
         
-        //if advanced .net =>  { get; init; }
-        public DateTime CreationDate { get; }
-
-
-
-        public Guid UserId { get; set; }
-        public UserDto User { get; set; }
-
-        public Guid ProjectId { get; set; }
-        public ProjectDto Project { get; set; }
+        [Required]
+        [JsonProperty(PropertyName = "user")]
+        public int UserId { get; set; }
+   
+        [Required]
+        [JsonProperty(PropertyName = "project")]     
+        public int ProjectId { get; set; }
 
 
     }

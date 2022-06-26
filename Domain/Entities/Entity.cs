@@ -5,20 +5,14 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    public class Entity
+    public class Entity : BaseGenericEntity<int>
     {
-        [Key]
-        public Guid Id { get; set; }
+        public override bool IsTransient () => Id == 0;
 
-
-
-        public bool IsTransient => Id == Guid.Empty;
-
-        public void GenerateIdentity()
+        public override void GenerateIdentity()
         {
-            if(IsTransient)
-                Id = Guid.NewGuid();
+            //if (IsTransient())
+            //    Id = Guid.NewGuid();
         }
-
     }
 }
