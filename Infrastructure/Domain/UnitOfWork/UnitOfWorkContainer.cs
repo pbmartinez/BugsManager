@@ -96,6 +96,9 @@ namespace Infrastructure.Domain.UnitOfWork
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Bug>()
+                .Property(b => b.CreationDate)
+                .ValueGeneratedOnAdd();
             modelBuilder.Seed();
         }
 

@@ -1,7 +1,9 @@
 ﻿using Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Application.Dtos
 {
@@ -12,19 +14,19 @@ namespace Application.Dtos
             CreationDate = DateTime.UtcNow;
         }
 
-        //Max 100
+        [Required]
+        [MaxLength(100)]
         public string Description { get; set; }
-        
-        //if advanced .net =>  { get; init; }
-        public DateTime CreationDate { get; }
 
+        public DateTime CreationDate { get; set; }
 
+        [JsonPropertyName("user")]
+        [Required]
+        public int UserId { get; set; }
 
-        public Guid UserId { get; set; }
-        public UserDto User { get; set; }
-
-        public Guid ProjectId { get; set; }
-        public ProjectDto Project { get; set; }
+        [JsonPropertyName("project")]
+        [Required]
+        public int ProjectId { get; set; }
 
 
     }

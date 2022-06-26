@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Application.Dtos
 {
-    public class UserDto:Entity
+    public class UserDto : Entity
     {
         public string Name { get; set; }
         public string SurName { get; set; }
