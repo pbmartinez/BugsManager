@@ -2,7 +2,7 @@
 
 namespace Application.IAppServices
 {
-    public partial interface IProjectAppService : IAppService<ProjectDto>
+    public partial interface IProjectAppService : IAppService<ProjectDto,int>
     {
     }
 }

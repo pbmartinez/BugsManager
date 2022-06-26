@@ -2,7 +2,7 @@
 
 namespace Application.IAppServices
 {
-    public partial interface IUserAppService : IAppService<UserDto>
+    public partial interface IUserAppService : IAppService<UserDto, int>
     {
     }
 }

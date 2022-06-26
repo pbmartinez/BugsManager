@@ -12,7 +12,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Domain.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public class Repository<TEntity> : IRepository<TEntity, int> 
+        where TEntity : Entity
     {
         private readonly IUnitOfWork _unitOfWork;
         public Repository(IUnitOfWork unitOfWork)
@@ -50,7 +51,7 @@ namespace Infrastructure.Domain.Repositories
         }
 
 
-        public TEntity Get(Guid id, List<string> includes = null)
+        public TEntity Get(int id, List<string> includes = null)
         {
             var item = _unitOfWork.GetQueryable(includes,(Expression<Func<TEntity,bool>>) (a => a.Id == id)).FirstOrDefault();
             return item;
@@ -62,7 +63,7 @@ namespace Infrastructure.Domain.Repositories
             return (IQueryable<TEntity>)await Task.FromResult(items);
         }
 
-        public async Task<TEntity> GetAsync(Guid id, List<string> includes = null)
+        public async Task<TEntity> GetAsync(int id, List<string> includes = null) 
         {
             var i = includes == null ? new List<string>() : includes.ToList();
             var item = await _unitOfWork.GetQueryable(i, (Expression<Func<TEntity, bool>>)(a => a.Id == id)).FirstOrDefaultAsync();

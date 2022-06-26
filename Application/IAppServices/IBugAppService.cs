@@ -2,7 +2,7 @@
 
 namespace Application.IAppServices
 {
-    public partial interface IBugAppService : IAppService<BugDto>
+    public partial interface IBugAppService : IAppService<BugDto,int>
     {
     }
 }

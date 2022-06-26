@@ -13,7 +13,7 @@ namespace WebApi.Controllers
 
     [ApiController]
     [Route("bugs")]
-    public class BugController : ApiBaseController<BugDto>
+    public class BugController : ApiBaseController<BugDto, int>
     {
         private readonly IBugAppService _BugAppService;        
         public BugController(IBugAppService appService, ILogger<BugController> logger, IPropertyCheckerService propertyCheckerService,
