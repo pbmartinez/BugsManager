@@ -32,7 +32,12 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options =>
+            {
+                options.ReturnHttpNotAcceptable = true;
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info
@@ -50,8 +55,7 @@ namespace WebApi
                 });
             });
 
-            
-            //services.AddAutoMapper(typeof(Startup));
+
             services.AddAutoMapperWithProfiles();
             services.AddEntitiesServicesAndRepositories();
             services.AddCustomApplicationServices();

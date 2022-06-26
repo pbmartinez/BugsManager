@@ -1,9 +1,11 @@
 ﻿using Domain.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Json.Serialization;
+
 
 namespace Application.Dtos
 {
@@ -20,12 +22,13 @@ namespace Application.Dtos
 
         public DateTime CreationDate { get; set; }
 
-        [JsonPropertyName("user")]
+        
         [Required]
+        [JsonProperty(PropertyName = "user")]
         public int UserId { get; set; }
-
-        [JsonPropertyName("project")]
+   
         [Required]
+        [JsonProperty(PropertyName = "project")]     
         public int ProjectId { get; set; }
 
 

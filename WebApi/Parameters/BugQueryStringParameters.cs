@@ -1,20 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Text.Json.Serialization;
 
 namespace WebApi.Parameters
 {
     public class BugQueryStringParameters
     {
-        [JsonPropertyName("project_id")]
+        [JsonProperty(PropertyName = "project_id")]
         public int? ProjectId { get; set; }
-
-        [JsonPropertyName("user_id")]
+                
+        [JsonProperty(PropertyName = "user_id")]
         public int? UserId { get; set; }
 
-        [JsonPropertyName("start_date")]
+        [JsonProperty(PropertyName = "start_date")]
         public DateTime? StartDate { get; set; }
 
-        [JsonPropertyName("end_date")]
+        [JsonProperty(PropertyName = "end_date")]
         public DateTime? EndDate { get; set; }
 
         public bool IsValid => !(ProjectId == null && UserId == null && StartDate == null && EndDate == null);
