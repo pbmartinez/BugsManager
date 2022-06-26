@@ -97,6 +97,8 @@ namespace WebApi.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Post(TEntityDto item)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             if (item.IsTransient())
                 item.GenerateIdentity();
             var result = await AppService.AddAsync(item);
@@ -106,6 +108,8 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> Put(TKey id, TEntityDto item)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             if (id == null)
                 return BadRequest();
             var itemTarget = await AppService.GetAsync(id);

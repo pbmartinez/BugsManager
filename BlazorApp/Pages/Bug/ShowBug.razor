@@ -18,15 +18,29 @@
     <MudCardContent>
         <MudForm @bind-IsValid="@success">
             <MudGrid>
-
-                <MudItem xs="6" sm="4">
-                    <MudTextField @bind-Value=@(item.Name) Disabled=@(disabled) Label="Name" Margin="Margin.Normal" Placeholder="Entre el nombre"
-                                  Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]">
-                    </MudTextField>
+                <MudItem xs="6" sm="4">                    
+                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label="User" HelperText="User" OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="Color.Primary" 
+                                Margin="Margin.Normal" Placeholder="Entre el nombre"  Immediate="true" Strict="true"  Text="Text to be desplayed"   
+                                Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
+                        @foreach (var item in Users)
+                        {
+                            <MudSelectItem T="int" Value="@item.Id" >@($"{item.Name} {item.SurName}")</MudSelectItem>
+                        }
+                    </MudSelect>
                 </MudItem>
-
-                <MudItem xs="6" sm="4">
-                    <MudTextField @bind-Value=item.SurName Disabled=@(disabled) Label="SurName" Margin="Margin.Normal" Placeholder="Entre la descripcion"
+                <MudItem xs="6" sm="4">                    
+                    <MudSelect @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label="Project" HelperText="Project" OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="Color.Primary" 
+                                Margin="Margin.Normal" Placeholder="Entre el nombre"  Immediate="true" Strict="true"  Text="Text to be desplayed"          
+                                Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
+                        @foreach (var item in Projects)
+                        {
+                            <MudSelectItem Value="@item.Id">@(item.Name)</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="12">
+                    <MudTextField @bind-Value=item.Description Disabled=@(disabled) Label="Description" Margin="Margin.Normal" Placeholder="Entre la descripcion"
+                                  Lines="5" MaxLength="100"
                                   Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]">
                     </MudTextField>
                 </MudItem>
@@ -65,14 +79,17 @@
 </MudCard>
 
 @code {
-    [Parameter]
-    public UserDto item { get; set; } = new UserDto();
+    public List<UserDto> Users = new List<UserDto>();
+    public List<ProjectDto> Projects = new List<ProjectDto>();
 
     [Parameter]
-    public Func<Task> OnSuccessfullySaveAsync { get; set; }= () => Task.CompletedTask;
+    public BugDto item { get; set; } = new BugDto();
 
     [Parameter]
-    public Func<Task> OnSuccessfullyDeletedAsync { get; set; }= () => Task.CompletedTask;
+    public Func<Task> OnSuccessfullySaveAsync { get; set; } = () => Task.CompletedTask;
+
+    [Parameter]
+    public Func<Task> OnSuccessfullyDeletedAsync { get; set; } = () => Task.CompletedTask;
 
     [Parameter]
     public Action OnCancelled { get; set; } = () => { };
@@ -112,10 +129,16 @@
             throw new ArgumentException(Localizer[Resource.Exception_MultipleModeOnShowView]);
     }
     public void Dispose() => Interceptor.DisposeEvent();
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        await UpdateDependenciesAsync();
         Interceptor.RegisterEvent();
         UpdateCardHeader();
+    }
+    private async Task UpdateDependenciesAsync()
+    {
+        Users = (await Http.GetFromJsonAsync<List<UserDto>>("/user")) ?? new List<UserDto>();
+        Projects = (await Http.GetFromJsonAsync<List<ProjectDto>>("/project")) ?? new List<ProjectDto>();
     }
 
     private void Cancel()
@@ -131,7 +154,7 @@
         }
         else
         {
-            var itemToDelete = await Http.GetFromJsonAsync<UserDto>($"/user/{item.Id}");
+            var itemToDelete = await Http.GetFromJsonAsync<BugDto>($"/bug/{item.Id}");
 
             if (itemToDelete == null)
             {
@@ -139,18 +162,18 @@
             }
             else
             {
-                var result = await Http.DeleteAsync($"/user/{item.Id}");
+                var result = await Http.DeleteAsync($"/bug/{item.Id}");
                 if (result.StatusCode == HttpStatusCode.NoContent)
                 {
                     Snackbar.Add(Localizer[Resource.message_SuccesfullyDeleted], Severity.Success);
-                    ( OnSuccessfullyDeletedAsync).Invoke();
+                    (OnSuccessfullyDeletedAsync).Invoke();
                 }
             }
         }
     }
     private async Task EditAsync()
     {
-        var itemToEdit = await Http.GetFromJsonAsync<UserDto>($"/user/{item.Id}");
+        var itemToEdit = await Http.GetFromJsonAsync<BugDto>($"/bug/{item.Id}");
 
         if (itemToEdit == null)
         {
@@ -158,21 +181,21 @@
         }
         else
         {
-            var result = await Http.PutAsJsonAsync<UserDto>($"/user/{item.Id}", item);
+            var result = await Http.PutAsJsonAsync<BugDto>($"/bug/{item.Id}", item);
             if (result.StatusCode == HttpStatusCode.NoContent)
             {
                 Snackbar.Add(Localizer[Resource.message_SuccesfullyEdited], Severity.Success);
-                ( OnSuccessfullySaveAsync).Invoke();
+                (OnSuccessfullySaveAsync).Invoke();
             }
         }
     }
     private async Task AddAsync()
     {
-        var result = await Http.PostAsJsonAsync<UserDto>($"/user", item);
+        var result = await Http.PostAsJsonAsync<BugDto>($"/bug", item);
         if (result.StatusCode == HttpStatusCode.Created || result.StatusCode == HttpStatusCode.OK)
         {
             Snackbar.Add(Localizer[Resource.message_SuccesfullyAdded], Severity.Success);
-            ( OnSuccessfullySaveAsync).Invoke();
+            (OnSuccessfullySaveAsync).Invoke();
         }
         var response = result.Content.ReadAsStringAsync();
     }

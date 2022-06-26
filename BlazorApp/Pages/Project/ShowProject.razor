@@ -69,10 +69,10 @@
     public ProjectDto item { get; set; } = new ProjectDto();
 
     [Parameter]
-    public Func<Task> OnSuccessfullySaveAsync { get; set; }
+    public Func<Task> OnSuccessfullySaveAsync { get; set; }= () => Task.CompletedTask;
 
     [Parameter]
-    public Func<Task> OnSuccessfullyDeletedAsync { get; set; }
+    public Func<Task> OnSuccessfullyDeletedAsync { get; set; }= () => Task.CompletedTask;
 
     [Parameter]
     public Action OnCancelled { get; set; } = () => { };
@@ -131,7 +131,7 @@
         }
         else
         {
-            var itemToDelete = await Http.GetFromJsonAsync<ProjectDto>($"project/{item.Id}");
+            var itemToDelete = await Http.GetFromJsonAsync<ProjectDto>($"/project/{item.Id}");
 
             if (itemToDelete == null)
             {
@@ -139,7 +139,7 @@
             }
             else
             {
-                var result = await Http.DeleteAsync($"project/{item.Id}");
+                var result = await Http.DeleteAsync($"/project/{item.Id}");
                 if (result.StatusCode == HttpStatusCode.NoContent)
                 {
                     Snackbar.Add(Localizer[Resource.message_SuccesfullyDeleted], Severity.Success);
@@ -150,7 +150,7 @@
     }
     private async Task EditAsync()
     {
-        var itemToEdit = await Http.GetFromJsonAsync<ProjectDto>($"project/{item.Id}");
+        var itemToEdit = await Http.GetFromJsonAsync<ProjectDto>($"/project/{item.Id}");
 
         if (itemToEdit == null)
         {
@@ -158,7 +158,7 @@
         }
         else
         {
-            var result = await Http.PutAsJsonAsync<ProjectDto>($"project/{item.Id}", item);
+            var result = await Http.PutAsJsonAsync<ProjectDto>($"/project/{item.Id}", item);
             if (result.StatusCode == HttpStatusCode.NoContent)
             {
                 Snackbar.Add(Localizer[Resource.message_SuccesfullyEdited], Severity.Success);
@@ -168,7 +168,7 @@
     }
     private async Task AddAsync()
     {
-        var result = await Http.PostAsJsonAsync<ProjectDto>($"project", item);
+        var result = await Http.PostAsJsonAsync<ProjectDto>($"/project", item);
         if (result.StatusCode == HttpStatusCode.Created || result.StatusCode == HttpStatusCode.OK)
         {
             Snackbar.Add(Localizer[Resource.message_SuccesfullyAdded], Severity.Success);

@@ -24,11 +24,11 @@ namespace Application.Dtos
 
         
         [Required]
-        [JsonProperty(PropertyName = "user")]
+        //[JsonProperty(PropertyName = "user")]
         public int UserId { get; set; }
    
         [Required]
-        [JsonProperty(PropertyName = "project")]     
+        //[JsonProperty(PropertyName = "project")]     
         public int ProjectId { get; set; }
 
 

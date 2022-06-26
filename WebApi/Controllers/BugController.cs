@@ -61,5 +61,20 @@ namespace WebApi.Controllers
                 return NotFound();
             return Ok(bugs);
         }
+
+        [HttpPost]
+        public override async Task<IActionResult> Post(BugDto item)
+        {
+            if (item.UserId <= 0)
+                ModelState.TryAddModelError(nameof(item.UserId), "User id is required");
+            if (item.ProjectId <= 0)
+                ModelState.TryAddModelError(nameof(item.ProjectId), "Project id is required");
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (item.IsTransient())
+                item.GenerateIdentity();
+            var result = await AppService.AddAsync(item);
+            return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
+        }
     }
 }
