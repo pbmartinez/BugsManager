@@ -232,6 +232,15 @@ namespace Domain.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bad request.
+        /// </summary>
+        public static string display_BadRequest {
+            get {
+                return ResourceManager.GetString("display_BadRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find ....
         /// </summary>
         public static string display_Buscar {
