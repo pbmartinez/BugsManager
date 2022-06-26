@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B71B08CA-1043-43D4-A6DE-FCF7A6CEEA45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{B71B08CA-1043-43D4-A6DE-FCF7A6CEEA45}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Presentation", "1-Presentation", "{3449677B-F108-4744-9431-51F890022E6A}"
 EndProject
@@ -13,13 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infrastructure", "3-Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Tests", "4-Tests", "{EDB886D7-E0DA-4AF4-B2CE-96C241EDEFC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6D47F46B-B107-4327-8FB7-2723F226F9B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{6D47F46B-B107-4327-8FB7-2723F226F9B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{88798256-6D9E-44B2-8F00-00D1566FDF73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{88798256-6D9E-44B2-8F00-00D1566FDF73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AC5C928F-A9F8-42A7-B163-12E254A899DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AC5C928F-A9F8-42A7-B163-12E254A899DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{C1830F50-1B88-4735-B10B-EF32DBE6FD9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{C1830F50-1B88-4735-B10B-EF32DBE6FD9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp", "BlazorApp\BlazorApp.csproj", "{45BABD74-BB81-4BDC-B537-C5E4135A7682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{C1830F50-1B88-4735-B10B-EF32DBE6FD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1830F50-1B88-4735-B10B-EF32DBE6FD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1830F50-1B88-4735-B10B-EF32DBE6FD9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45BABD74-BB81-4BDC-B537-C5E4135A7682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45BABD74-BB81-4BDC-B537-C5E4135A7682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45BABD74-BB81-4BDC-B537-C5E4135A7682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45BABD74-BB81-4BDC-B537-C5E4135A7682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{88798256-6D9E-44B2-8F00-00D1566FDF73} = {E0E150D5-DB34-4442-A74A-2E4075891DD0}
 		{AC5C928F-A9F8-42A7-B163-12E254A899DB} = {D14D4D5B-3DE6-41CF-BA11-FE016505D40C}
 		{C1830F50-1B88-4735-B10B-EF32DBE6FD9E} = {3449677B-F108-4744-9431-51F890022E6A}
+		{45BABD74-BB81-4BDC-B537-C5E4135A7682} = {3449677B-F108-4744-9431-51F890022E6A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C2666F3-B7C4-4DC0-B51F-E6D7093FC657}
