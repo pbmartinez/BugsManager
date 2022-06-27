@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using WebApi.Filters;
 using WebApi.Parameters;
 
 namespace WebApi.Controllers
@@ -44,10 +45,11 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
+        [CheckHttpMethodFilter]
         [HttpHead]
         [HttpGet]
         [Route("~/bugs")]
-        public async Task<IActionResult> Get([FromQuery] QueryStringParameters queryStringParameters,
+        public async Task<IActionResult> GetBugs([FromQuery] QueryStringParameters queryStringParameters,
             [FromQuery] BugQueryStringParameters bugQuery)
         {
             if (!bugQuery.IsValid)
@@ -61,11 +63,9 @@ namespace WebApi.Controllers
                 return NotFound();
             return Ok(bugs);
         }
-        
-        [HttpPost][HttpPut][HttpPatch][HttpDelete]
-        [Route("~/bugs", Order = 2)]
-        public IActionResult Get405([FromQuery] QueryStringParameters queryStringParameters,
-            [FromQuery] BugQueryStringParameters bugQuery)
+
+        [HttpPost][HttpPut][HttpPatch][HttpDelete][Route("~/bugs", Order = 2)]
+        public IActionResult Get()
         {
             return StatusCode(StatusCodes.Status405MethodNotAllowed);
         }
