@@ -18,7 +18,7 @@
     <MudCardContent>
         <MudForm @bind-IsValid="@success">
             <MudGrid>
-                <MudItem xs="6" sm="4">                    
+                <MudItem xs="12" sm="6">                    
                     <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label="User" HelperText="User" OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="Color.Primary" 
                                 Margin="Margin.Normal" Placeholder="Entre el nombre"  Immediate="true" Strict="true"  Text="Text to be desplayed"   
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
@@ -28,7 +28,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem xs="6" sm="4">                    
+                <MudItem xs="12" sm="6">                    
                     <MudSelect @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label="Project" HelperText="Project" OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="Color.Primary" 
                                 Margin="Margin.Normal" Placeholder="Entre el nombre"  Immediate="true" Strict="true"  Text="Text to be desplayed"          
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
@@ -40,7 +40,7 @@
                 </MudItem>
                 <MudItem xs="12" sm="12">
                     <MudTextField @bind-Value=item.Description Disabled=@(disabled) Label="Description" Margin="Margin.Normal" Placeholder="Entre la descripcion"
-                                  Lines="5" MaxLength="100"
+                                  Lines="4" MaxLength="100"
                                   Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]">
                     </MudTextField>
                 </MudItem>
