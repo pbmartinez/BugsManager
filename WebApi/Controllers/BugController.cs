@@ -61,6 +61,14 @@ namespace WebApi.Controllers
                 return NotFound();
             return Ok(bugs);
         }
+        
+        [HttpPost][HttpPut][HttpPatch][HttpDelete]
+        [Route("~/bugs", Order = 2)]
+        public IActionResult Get405([FromQuery] QueryStringParameters queryStringParameters,
+            [FromQuery] BugQueryStringParameters bugQuery)
+        {
+            return StatusCode(StatusCodes.Status405MethodNotAllowed);
+        }
 
         [HttpPost]
         public override async Task<IActionResult> Post(BugDto item)
