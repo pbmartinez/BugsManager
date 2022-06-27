@@ -19,8 +19,8 @@
         <MudForm @bind-IsValid="@success">
             <MudGrid>
                 <MudItem xs="12" sm="6">                    
-                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label="User" HelperText="User" OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="Color.Primary" 
-                                Margin="Margin.Normal" Placeholder="Entre el nombre"  Immediate="true" Strict="true"  Text="Text to be desplayed"   
+                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoUserId] HelperText=@Localizer[Resource.BugDtoUserId] OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="Color.Primary" 
+                                Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoUserId]  Immediate="true" Strict="true"    
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
                         @foreach (var item in Users)
                         {
@@ -29,17 +29,17 @@
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="12" sm="6">                    
-                    <MudSelect @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label="Project" HelperText="Project" OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="Color.Primary" 
-                                Margin="Margin.Normal" Placeholder="Entre el nombre"  Immediate="true" Strict="true"  Text="Text to be desplayed"          
+                    <MudSelect T="int" @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoProjectId] HelperText=@Localizer[Resource.BugDtoProjectId] OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="Color.Primary" 
+                                Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoProjectId] Immediate="true" Strict="true"           
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
                         @foreach (var item in Projects)
                         {
-                            <MudSelectItem Value="@item.Id">@(item.Name)</MudSelectItem>
+                            <MudSelectItem T="int"  Value="@item.Id">@(item.Name)</MudSelectItem>
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="12" sm="12">
-                    <MudTextField @bind-Value=item.Description Disabled=@(disabled) Label="Description" Margin="Margin.Normal" Placeholder="Entre la descripcion"
+                    <MudTextField @bind-Value=item.Description Disabled=@(disabled) Label=@Localizer[Resource.BugDtoDescription] Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoDescription]
                                   Lines="4" MaxLength="100"
                                   Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]">
                     </MudTextField>
@@ -137,7 +137,7 @@
     }
     private async Task UpdateDependenciesAsync()
     {
-        Users = (await Http.GetFromJsonAsync<List<UserDto>>("/user")) ?? new List<UserDto>();
+        Users = (await Http.GetFromJsonAsync<List<UserDto>>("/user/available")) ?? new List<UserDto>();
         Projects = (await Http.GetFromJsonAsync<List<ProjectDto>>("/project")) ?? new List<ProjectDto>();
     }
 
@@ -166,7 +166,7 @@
                 if (result.StatusCode == HttpStatusCode.NoContent)
                 {
                     Snackbar.Add(Localizer[Resource.message_SuccesfullyDeleted], Severity.Success);
-                    (OnSuccessfullyDeletedAsync).Invoke();
+                    await OnSuccessfullyDeletedAsync.Invoke();
                 }
             }
         }
@@ -185,7 +185,7 @@
             if (result.StatusCode == HttpStatusCode.NoContent)
             {
                 Snackbar.Add(Localizer[Resource.message_SuccesfullyEdited], Severity.Success);
-                (OnSuccessfullySaveAsync).Invoke();
+                await OnSuccessfullySaveAsync.Invoke();
             }
         }
     }
@@ -195,7 +195,7 @@
         if (result.StatusCode == HttpStatusCode.Created || result.StatusCode == HttpStatusCode.OK)
         {
             Snackbar.Add(Localizer[Resource.message_SuccesfullyAdded], Severity.Success);
-            (OnSuccessfullySaveAsync).Invoke();
+            await OnSuccessfullySaveAsync.Invoke();
         }
         var response = result.Content.ReadAsStringAsync();
     }

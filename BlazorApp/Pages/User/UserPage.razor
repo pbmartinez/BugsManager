@@ -9,14 +9,13 @@
 @inject IStringLocalizer<Resource> Localizer
 
 <MudTable Items="@Elements" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<UserDto,bool>(FilterFunc)"
-          @bind-SelectedItem="selectedItem1" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
-          OnCommitEditClick="@(() => Snackbar.Add("Commit Edit Handler Invoked"))" IsEditRowSwitchingBlocked="@blockSwitch">
+          @bind-SelectedItem="selectedItem1" >
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Users</MudText>
+        <MudText Typo="Typo.h6">@Localizer[Resource.UserDtos]</MudText>
         <MudSpacer />
-        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        <MudTextField @bind-Value="searchString" Placeholder=@Localizer[Resource.display_Search] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         <MudSpacer />
-        <MudTooltip Text=Add >
+        <MudTooltip Text=@Localizer[Resource.btn_Add] >
             <MudIconButton @onclick="@Add" Icon="@Icons.Material.Filled.Add" Color=Color.Inherit ></MudIconButton>
         </MudTooltip>
     </ToolBarContent>
@@ -33,8 +32,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Id">@context.Id</MudTd>
-        <MudTd DataLabel="Name">@context.Name</MudTd>
-        <MudTd DataLabel="SurName">@context.SurName</MudTd>
+        <MudTd>@context.Name</MudTd>
+        <MudTd>@context.SurName</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text=@Localizer[Resource.btn_Details]>
                 <MudFab @onclick="@(()=>Show(context))" Color=Color.Default Icon="@Icons.Material.Filled.Visibility" Size=Size.Small> </MudFab>
@@ -47,15 +46,6 @@
             </MudTooltip>
         </MudTd>
     </RowTemplate>
-    <RowEditingTemplate>
-        <MudTd DataLabel="Id">@context.Id</MudTd>
-        <MudTd DataLabel="Name">
-            <MudTextField @bind-Value="@context.Name" Required />
-        </MudTd>
-        <MudTd DataLabel="SurName">
-            <MudTextField @bind-Value="@context.SurName" Required />
-        </MudTd>
-    </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />
     </PagerContent>
@@ -69,10 +59,8 @@
     private bool hover = true;
     private bool ronly = true;
     private bool canCancelEdit = true;
-    private bool blockSwitch = true;
     private string searchString = "";
-    private UserDto selectedItem1 = null;
-    private UserDto elementBeforeEdit;
+    private UserDto selectedItem1 = null!;
     private HashSet<UserDto> selectedItems1 = new HashSet<UserDto>();
     private IDialogReference? dialogReference;
     private DialogOptions dialogOptions = new DialogOptions { CloseButton = true };
@@ -83,7 +71,7 @@
     {
         await UpdateGridAsync();
         if (Elements == null || !Elements.Any())
-            Snackbar.Add("No hay elementos!", Severity.Info);
+            Snackbar.Add(@Localizer[Resource.message_NoItemsFound], Severity.Info);
     }
 
     private async Task Show(UserDto pivot)

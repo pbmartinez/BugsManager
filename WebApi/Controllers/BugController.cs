@@ -64,7 +64,8 @@ namespace WebApi.Controllers
             return Ok(bugs);
         }
 
-        [HttpPost][HttpPut][HttpPatch][HttpDelete][Route("~/bugs", Order = 2)]
+        [HttpPost][HttpPut][HttpPatch][HttpDelete]
+        [Route("~/bugs", Order = 2)]
         public IActionResult Get()
         {
             return StatusCode(StatusCodes.Status405MethodNotAllowed);
@@ -73,10 +74,6 @@ namespace WebApi.Controllers
         [HttpPost]
         public override async Task<IActionResult> Post(BugDto item)
         {
-            if (item.UserId <= 0)
-                ModelState.TryAddModelError(nameof(item.UserId), "User id is required");
-            if (item.ProjectId <= 0)
-                ModelState.TryAddModelError(nameof(item.ProjectId), "Project id is required");
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             if (item.IsTransient())

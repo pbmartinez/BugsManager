@@ -20,13 +20,13 @@
             <MudGrid>
 
                 <MudItem  xs="12" sm="6">
-                    <MudTextField @bind-Value=@(item.Name) Disabled=@(disabled) Label="Name" Margin="Margin.Normal" Placeholder="Entre el nombre"
+                    <MudTextField @bind-Value=@(item.Name) Disabled=@(disabled) Label=@Localizer[Resource.UserDtoName] Margin="Margin.Normal" Placeholder=@Localizer[Resource.UserDtoName]
                                   Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]">
                     </MudTextField>
                 </MudItem>
 
                 <MudItem xs="12" sm="6">
-                    <MudTextField @bind-Value=item.SurName Disabled=@(disabled) Label="SurName" Margin="Margin.Normal" Placeholder="Entre la descripcion"
+                    <MudTextField @bind-Value=item.SurName Disabled=@(disabled) Label=@Localizer[Resource.UserDtoSurname] Margin="Margin.Normal" Placeholder=@Localizer[Resource.UserDtoSurname]
                                   Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]">
                     </MudTextField>
                 </MudItem>
@@ -143,7 +143,7 @@
                 if (result.StatusCode == HttpStatusCode.NoContent)
                 {
                     Snackbar.Add(Localizer[Resource.message_SuccesfullyDeleted], Severity.Success);
-                    ( OnSuccessfullyDeletedAsync).Invoke();
+                    await OnSuccessfullyDeletedAsync.Invoke();
                 }
             }
         }
@@ -162,7 +162,7 @@
             if (result.StatusCode == HttpStatusCode.NoContent)
             {
                 Snackbar.Add(Localizer[Resource.message_SuccesfullyEdited], Severity.Success);
-                ( OnSuccessfullySaveAsync).Invoke();
+                await OnSuccessfullySaveAsync.Invoke();
             }
         }
     }
@@ -172,7 +172,7 @@
         if (result.StatusCode == HttpStatusCode.Created || result.StatusCode == HttpStatusCode.OK)
         {
             Snackbar.Add(Localizer[Resource.message_SuccesfullyAdded], Severity.Success);
-            ( OnSuccessfullySaveAsync).Invoke();
+            await OnSuccessfullySaveAsync.Invoke();
         }
         var response = result.Content.ReadAsStringAsync();
     }

@@ -133,6 +133,60 @@ namespace Domain.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bug.
+        /// </summary>
+        public static string BugDto {
+            get {
+                return ResourceManager.GetString("BugDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creation Date.
+        /// </summary>
+        public static string BugDtoCreationDate {
+            get {
+                return ResourceManager.GetString("BugDtoCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string BugDtoDescription {
+            get {
+                return ResourceManager.GetString("BugDtoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string BugDtoProjectId {
+            get {
+                return ResourceManager.GetString("BugDtoProjectId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bugs.
+        /// </summary>
+        public static string BugDtos {
+            get {
+                return ResourceManager.GetString("BugDtos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string BugDtoUserId {
+            get {
+                return ResourceManager.GetString("BugDtoUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 401.
         /// </summary>
         public static string display_401 {
@@ -241,15 +295,6 @@ namespace Domain.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find ....
-        /// </summary>
-        public static string display_Buscar {
-            get {
-                return ResourceManager.GetString("display_Buscar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete ?.
         /// </summary>
         public static string display_ConfirmOnDelete {
@@ -277,6 +322,15 @@ namespace Domain.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find ....
+        /// </summary>
+        public static string display_Search {
+            get {
+                return ResourceManager.GetString("display_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome.
         /// </summary>
         public static string display_Welcome {
@@ -286,7 +340,7 @@ namespace Domain.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Gateway Application.
+        ///   Looks up a localized string similar to Welcome to Bugs Manager Application.
         /// </summary>
         public static string display_WelcomeMessage {
             get {
@@ -322,56 +376,11 @@ namespace Domain.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gateway.
+        ///   Looks up a localized string similar to Bugs.
         /// </summary>
-        public static string GatewayDto {
+        public static string menu_Bug {
             get {
-                return ResourceManager.GetString("GatewayDto", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ipv4.
-        /// </summary>
-        public static string GatewayDtoIpv4Address {
-            get {
-                return ResourceManager.GetString("GatewayDtoIpv4Address", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string GatewayDtoName {
-            get {
-                return ResourceManager.GetString("GatewayDtoName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Peripherals.
-        /// </summary>
-        public static string GatewayDtoPeripherals {
-            get {
-                return ResourceManager.GetString("GatewayDtoPeripherals", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gateways.
-        /// </summary>
-        public static string GatewayDtos {
-            get {
-                return ResourceManager.GetString("GatewayDtos", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gateways.
-        /// </summary>
-        public static string menu_Gateway {
-            get {
-                return ResourceManager.GetString("menu_Gateway", resourceCulture);
+                return ResourceManager.GetString("menu_Bug", resourceCulture);
             }
         }
         
@@ -385,11 +394,20 @@ namespace Domain.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Peripherals.
+        ///   Looks up a localized string similar to Projects.
         /// </summary>
-        public static string menu_Peripheral {
+        public static string menu_Project {
             get {
-                return ResourceManager.GetString("menu_Peripheral", resourceCulture);
+                return ResourceManager.GetString("menu_Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string menu_User {
+            get {
+                return ResourceManager.GetString("menu_User", resourceCulture);
             }
         }
         
@@ -399,6 +417,15 @@ namespace Domain.Localization {
         public static string message_ItemDoesNotExist {
             get {
                 return ResourceManager.GetString("message_ItemDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No items were found.
+        /// </summary>
+        public static string message_NoItemsFound {
+            get {
+                return ResourceManager.GetString("message_NoItemsFound", resourceCulture);
             }
         }
         
@@ -475,20 +502,11 @@ namespace Domain.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gateways.
+        ///   Looks up a localized string similar to Bugs.
         /// </summary>
-        public static string page_GridGateways {
+        public static string page_Bugs {
             get {
-                return ResourceManager.GetString("page_GridGateways", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Peripherals.
-        /// </summary>
-        public static string page_GridPeripherals {
-            get {
-                return ResourceManager.GetString("page_GridPeripherals", resourceCulture);
+                return ResourceManager.GetString("page_Bugs", resourceCulture);
             }
         }
         
@@ -502,56 +520,110 @@ namespace Domain.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Peripheral.
+        ///   Looks up a localized string similar to Projects.
         /// </summary>
-        public static string PeripheralDto {
+        public static string page_Projects {
             get {
-                return ResourceManager.GetString("PeripheralDto", resourceCulture);
+                return ResourceManager.GetString("page_Projects", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created Date.
+        ///   Looks up a localized string similar to Users.
         /// </summary>
-        public static string PeripheralDtoCreatedDate {
+        public static string page_Users {
             get {
-                return ResourceManager.GetString("PeripheralDtoCreatedDate", resourceCulture);
+                return ResourceManager.GetString("page_Users", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gateway.
+        ///   Looks up a localized string similar to Project.
         /// </summary>
-        public static string PeripheralDtoGatewayId {
+        public static string ProjectDto {
             get {
-                return ResourceManager.GetString("PeripheralDtoGatewayId", resourceCulture);
+                return ResourceManager.GetString("ProjectDto", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Peripherals.
+        ///   Looks up a localized string similar to Bugs.
         /// </summary>
-        public static string PeripheralDtos {
+        public static string ProjectDtoBugs {
             get {
-                return ResourceManager.GetString("PeripheralDtos", resourceCulture);
+                return ResourceManager.GetString("ProjectDtoBugs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status.
+        ///   Looks up a localized string similar to Description.
         /// </summary>
-        public static string PeripheralDtoStatus {
+        public static string ProjectDtoDescription {
             get {
-                return ResourceManager.GetString("PeripheralDtoStatus", resourceCulture);
+                return ResourceManager.GetString("ProjectDtoDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vendor.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string PeripheralDtoVendor {
+        public static string ProjectDtoName {
             get {
-                return ResourceManager.GetString("PeripheralDtoVendor", resourceCulture);
+                return ResourceManager.GetString("ProjectDtoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Projects.
+        /// </summary>
+        public static string ProjectDtos {
+            get {
+                return ResourceManager.GetString("ProjectDtos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string UserDto {
+            get {
+                return ResourceManager.GetString("UserDto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bug.
+        /// </summary>
+        public static string UserDtoBug {
+            get {
+                return ResourceManager.GetString("UserDtoBug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string UserDtoName {
+            get {
+                return ResourceManager.GetString("UserDtoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string UserDtos {
+            get {
+                return ResourceManager.GetString("UserDtos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        public static string UserDtoSurname {
+            get {
+                return ResourceManager.GetString("UserDtoSurname", resourceCulture);
             }
         }
         
@@ -565,20 +637,20 @@ namespace Domain.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ipv4 it has bad format.
+        ///   Looks up a localized string similar to You have reached the maximum capacity of this field.
         /// </summary>
-        public static string validation_Ipv4AddressBadFormat {
+        public static string validation_MaxLengthOverload {
             get {
-                return ResourceManager.GetString("validation_Ipv4AddressBadFormat", resourceCulture);
+                return ResourceManager.GetString("validation_MaxLengthOverload", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No more then {0} peripherals by gateway are allowed.
+        ///   Looks up a localized string similar to Specified user is already hooked with a bug.
         /// </summary>
-        public static string validation_MaxPeriphelsAllowed {
+        public static string validation_UserAlreadyBugged {
             get {
-                return ResourceManager.GetString("validation_MaxPeriphelsAllowed", resourceCulture);
+                return ResourceManager.GetString("validation_UserAlreadyBugged", resourceCulture);
             }
         }
     }
