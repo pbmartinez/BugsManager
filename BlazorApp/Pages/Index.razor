@@ -1,7 +1,86 @@
 ﻿@page "/"
 
+@using System.Net.Http.Json
+@using Application.Dtos
+@using Domain.Localization
+@using Microsoft.Extensions.Localization
+@using BlazorApp.Components
+@inject HttpClient httpClient
+@inject ISnackbar Snackbar
+@inject IDialogService Dialog
+@inject IStringLocalizer<Resource> Localizer
+
 <PageTitle>Index</PageTitle>
 
-<MudText Typo="Typo.h3" GutterBottom="true">Hello, world!</MudText>
-<MudText Class="mb-8">Welcome to your new app, powered by MudBlazor!</MudText>
-<MudAlert Severity="Severity.Normal">You can find documentation and examples on our website here: <MudLink Href="https://mudblazor.com" Typo="Typo.body2" Color="Color.Inherit"><b>www.mudblazor.com</b></MudLink></MudAlert>
+<MudGrid>
+    <MudItem xs="12" sm="6" md="3">
+        <SimpleCard Title=@Localizer[Resource.BugDtos] Value=@TotalBugs.ToString()
+                    MudIcon=@Icons.Material.Filled.BugReport Color=@MudBlazor.Color.Error>
+        </SimpleCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3">
+        <SimpleCard Title=@Localizer[Resource.ProjectDtos] Value=@TotalProjects.ToString()
+                    MudIcon=@Icons.Material.Filled.Plumbing Color=@MudBlazor.Color.Success>
+        </SimpleCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3">
+        <SimpleCard Title=@Localizer[Resource.UserDtos] Value=@UnnavailableUsers.ToString()
+                    MudIcon=@Icons.Material.Filled.VerifiedUser Color=@MudBlazor.Color.Info>
+        </SimpleCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3">
+        <SimpleCard Title=@Localizer[Resource.UserDtos] Value=@AvailableUsers.ToString()
+                    MudIcon=@Icons.Material.Filled.SupervisedUserCircle Color=@MudBlazor.Color.Warning>
+        </SimpleCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="6">
+        <MudPaper Class="pa-4" Style="height:500px;">
+            @if (Projects == null || Projects.Count == 0)
+            {
+                <MudProgressCircular Indeterminate=true Color="MudBlazor.Color.Info" Size="Size.Large"></MudProgressCircular>
+            }
+            else
+            {
+                <GraphicChart Projects="@Projects"></GraphicChart>
+            }
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="6">
+        <MudPaper Class="pa-4" Style="height:500px;">
+            @if (Projects == null || Projects.Count == 0)
+            {
+                <MudProgressCircular Indeterminate=true Color="MudBlazor.Color.Info" Size="Size.Large"></MudProgressCircular>
+            }
+            else
+            {
+                <PieChart Projects="@Projects" Total="@Projects.Sum(p=>p.Bugs.Count)"></PieChart>
+            }
+        </MudPaper>
+    </MudItem>
+
+</MudGrid>
+@code {
+    private int AvailableUsers { get; set; }
+    private int UnnavailableUsers { get; set; }
+    private int TotalBugs { get; set; }
+    private int TotalProjects { get; set; }
+    private List<UserDto> Users { get; set; } = new List<UserDto>();
+    private List<BugDto> Bugs { get; set; } = new List<BugDto>();
+    private List<ProjectDto> Projects { get; set; } = new List<ProjectDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Users = (await httpClient.GetFromJsonAsync<List<UserDto>>("/user")) ?? new List<UserDto>();
+        Bugs = (await httpClient.GetFromJsonAsync<List<BugDto>>("/bug")) ?? new List<BugDto>();
+        Projects = (await httpClient.GetFromJsonAsync<List<ProjectDto>>("/project?Fields=Id,Name,Description,Bugs&Includes=Bugs")) ?? new List<ProjectDto>();
+        TotalBugs = Bugs.Count;
+        TotalProjects = Projects.Count;
+        AvailableUsers = Users.Count - TotalBugs;
+        UnnavailableUsers = TotalBugs;
+    }
+
+}

@@ -1,0 +1,32 @@
+﻿@using Application.Dtos
+@using Domain.Interfaces
+@using Domain.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resource> Localizer
+
+<ApexChart TItem="ProjectDto"
+           Title="@Localizer[Resource.display_GraphicTitle]"
+            >
+        <ApexPointSeries TItem="ProjectDto"
+                     Items="@Projects"
+                     Name="Bugs by Project"
+                     XValue="@(e => e.Name)"
+                     YAggregate="@(e => e.Sum(b => (decimal)b.Bugs.Count))"
+                     SeriesType="SeriesType.Bar"
+                     />
+
+</ApexChart>
+
+
+@code {
+    [EditorRequired]
+    [Parameter] 
+    public List<ProjectDto> Projects { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+
+    }
+}

@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.IAppServices;
+using Domain.Entities;
+using Domain.Localization;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,10 @@ using System.Text;
 using System.Text.Json.Serialization;
 
 
+
 namespace Application.Dtos
 {
-    public class BugDto : Entity
+    public class BugDto : Entity, IValidatableObject
     {
         public BugDto()
         {
@@ -31,6 +34,14 @@ namespace Application.Dtos
         //[JsonProperty(PropertyName = "project")]     
         public int ProjectId { get; set; }
 
-
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errors = new List<ValidationResult>();
+            if (UserId <= 0)
+                errors.Add(new ValidationResult(Resource.validation_FieldRequired, new string[] { nameof(UserId) }));
+            if (ProjectId <= 0)
+                errors.Add(new ValidationResult(Resource.validation_FieldRequired, new string[] { nameof(ProjectId) }));
+            return errors;
+        }
     }
 }

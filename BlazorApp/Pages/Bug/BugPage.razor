@@ -1,4 +1,4 @@
-﻿@page "/Bugs"
+﻿@page "/bugs"
 @using System.Net.Http.Json
 @using Application.Dtos
 @using Domain.Localization
@@ -9,15 +9,15 @@
 @inject IStringLocalizer<Resource> Localizer
 
 <MudTable Items="@Elements" Dense="@dense" Hover="@hover" ReadOnly="@ronly" CanCancelEdit="@canCancelEdit" Filter="new Func<BugDto,bool>(FilterFunc)"
-          @bind-SelectedItem="selectedItem1" SortLabel="Sort By" CommitEditTooltip="Commit Edit"
-          OnCommitEditClick="@(() => Snackbar.Add("Commit Edit Handler Invoked"))" IsEditRowSwitchingBlocked="@blockSwitch">
+          @bind-SelectedItem="selectedItem1" SortLabel="Sort By" 
+          >
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Bugs</MudText>
+        <MudText Typo="Typo.h6">@Localizer[Resource.BugDtos]</MudText>
         <MudSpacer />
-        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        <MudTextField @bind-Value="searchString" Placeholder=@Localizer[Resource.display_Search] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         <MudSpacer />
-        <MudTooltip Text=Add >
-            <MudIconButton @onclick="@Add" Icon="@Icons.Material.Filled.Add" Color=Color.Inherit ></MudIconButton>
+        <MudTooltip Text=@Localizer[Resource.btn_Add]>
+            <MudIconButton @onclick="@Add" Icon="@Icons.Material.Filled.Add" Color=@MudBlazor.Color.Inherit ></MudIconButton>
         </MudTooltip>
     </ToolBarContent>
     <ColGroup>
@@ -28,38 +28,29 @@
     </ColGroup>
     <HeaderContent>
         <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.UserId)">UserId</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.ProjectId)">ProjectId</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.Description)">Description</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.CreationDate)">CreationDate</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.UserId)">@Localizer[Resource.BugDtoUserId]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.ProjectId)">@Localizer[Resource.BugDtoProjectId]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.Description)">@Localizer[Resource.BugDtoDescription]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.CreationDate)">@Localizer[Resource.BugDtoCreationDate]</MudTableSortLabel></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Id">@context.Id</MudTd>
-        <MudTd DataLabel="User">@context.UserId</MudTd>
-        <MudTd DataLabel="Project">@context.ProjectId</MudTd>
-        <MudTd DataLabel="Description">@context.Description</MudTd>
-        <MudTd DataLabel="CreationDate">@context.CreationDate</MudTd>
+        <MudTd>@context.Id</MudTd>
+        <MudTd>@context.UserId</MudTd>
+        <MudTd>@context.ProjectId</MudTd>
+        <MudTd>@context.Description</MudTd>
+        <MudTd>@context.CreationDate</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text=@Localizer[Resource.btn_Details]>
-                <MudFab @onclick="@(()=>Show(context))" Color=Color.Default Icon="@Icons.Material.Filled.Visibility" Size=Size.Small> </MudFab>
+                <MudFab @onclick="@(()=>Show(context))" Color=@MudBlazor.Color.Default Icon="@Icons.Material.Filled.Visibility" Size=Size.Small> </MudFab>
             </MudTooltip>
             <MudTooltip Text=@Localizer[Resource.btn_Edit]>
-                <MudFab @onclick="@(()=>Edit(context))" Color=Color.Warning Icon="@Icons.Material.Filled.Edit" Size=Size.Small> </MudFab>
+                <MudFab @onclick="@(()=>Edit(context))" Color=@MudBlazor.Color.Warning Icon="@Icons.Material.Filled.Edit" Size=Size.Small> </MudFab>
             </MudTooltip>
             <MudTooltip Text=@Localizer[Resource.btn_Delete]>
-                <MudFab @onclick="@(()=>Delete(context))" Color=Color.Error Icon="@Icons.Material.Filled.Delete" Size=Size.Small> </MudFab>
+                <MudFab @onclick="@(()=>Delete(context))" Color=@MudBlazor.Color.Error Icon="@Icons.Material.Filled.Delete" Size=Size.Small> </MudFab>
             </MudTooltip>
         </MudTd>
-    </RowTemplate>
-    <RowEditingTemplate>
-        <MudTd DataLabel="Id">@context.Id</MudTd>
-       
-       
-        <MudTd DataLabel="Description">
-            <MudTextField @bind-Value="@context.Description" Required />
-        </MudTd>
-
-    </RowEditingTemplate>
+    </RowTemplate>    
     <PagerContent>
         <MudTablePager />
     </PagerContent>
@@ -73,10 +64,8 @@
     private bool hover = true;
     private bool ronly = true;
     private bool canCancelEdit = true;
-    private bool blockSwitch = true;
     private string searchString = "";
-    private BugDto selectedItem1 = null;
-    private BugDto elementBeforeEdit;
+    private BugDto selectedItem1 = null!;
     private HashSet<BugDto> selectedItems1 = new HashSet<BugDto>();
     private IDialogReference? dialogReference;
     private DialogOptions dialogOptions = new DialogOptions { CloseButton = true };
@@ -87,7 +76,7 @@
     {
         await UpdateGridAsync();
         if (Elements == null || !Elements.Any())
-            Snackbar.Add("No hay elementos!", Severity.Info);
+            Snackbar.Add(Localizer[Resource.message_NoItemsFound], Severity.Info);
     }
 
     private async Task Show(BugDto pivot)
