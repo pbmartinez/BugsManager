@@ -18,8 +18,8 @@
     <MudCardContent>
         <MudForm @bind-IsValid="@success">
             <MudGrid>
-                <MudItem xs="12" sm="6">                    
-                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoUserId] HelperText=@Localizer[Resource.BugDtoUserId] OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="MudBlazor.Color.Primary" 
+                <MudItem xs="12" sm="12">                    
+                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoUserId] OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="MudBlazor.Color.Primary" 
                                 Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoUserId]  Immediate="true" Strict="true"    
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
                         @foreach (var item in Users)
@@ -28,8 +28,8 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem xs="12" sm="6">                    
-                    <MudSelect T="int" @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoProjectId] HelperText=@Localizer[Resource.BugDtoProjectId] OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="MudBlazor.Color.Primary" 
+                <MudItem xs="12" sm="12">                    
+                    <MudSelect T="int" @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoProjectId] OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="MudBlazor.Color.Primary" 
                                 Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoProjectId] Immediate="true" Strict="true"           
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
                         @foreach (var item in Projects)
