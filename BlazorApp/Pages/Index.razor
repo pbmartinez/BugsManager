@@ -74,13 +74,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Users = (await httpClient.GetFromJsonAsync<List<UserDto>>("/user")) ?? new List<UserDto>();
+        Users = (await httpClient.GetFromJsonAsync<List<UserDto>>("/user?Fields=id,name, surname,bug&Includes=Bug")) ?? new List<UserDto>();
         Bugs = (await httpClient.GetFromJsonAsync<List<BugDto>>("/bug")) ?? new List<BugDto>();
         Projects = (await httpClient.GetFromJsonAsync<List<ProjectDto>>("/project?Fields=Id,Name,Description,Bugs&Includes=Bugs")) ?? new List<ProjectDto>();
         TotalBugs = Bugs.Count;
         TotalProjects = Projects.Count;
-        AvailableUsers = Users.Count - TotalBugs;
-        UnnavailableUsers = TotalBugs;
+        AvailableUsers = Users.Count(u => u.Bug == null);
+        UnnavailableUsers = Users.Count - AvailableUsers;
     }
 
 }
