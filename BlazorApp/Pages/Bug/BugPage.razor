@@ -35,8 +35,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>@context.Id</MudTd>
-        <MudTd>@context.UserId</MudTd>
-        <MudTd>@context.ProjectId</MudTd>
+        <MudTd>@context.UserFullName</MudTd>
+        <MudTd>@context.ProjectName</MudTd>
         <MudTd>@context.Description</MudTd>
         <MudTd>@context.CreationDate</MudTd>
         <MudTd DataLabel="">
@@ -146,7 +146,7 @@
 
     private async Task UpdateGridAsync()
     {
-        Elements = (await httpClient.GetFromJsonAsync<List<BugDto>>("/bug")) ?? new List<BugDto>();        
+        Elements = (await httpClient.GetFromJsonAsync<List<BugDto>>("/bug?Includes=User,Project")) ?? new List<BugDto>();        
     }
 
     private void OnCancelled()

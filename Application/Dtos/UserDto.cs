@@ -11,5 +11,8 @@ namespace Application.Dtos
         public string SurName { get; set; }
 
         public BugDto Bug { get; set; }
+
+
+        public string FullName => $"{Name} {SurName}";
     }
 }

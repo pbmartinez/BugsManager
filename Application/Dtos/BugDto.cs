@@ -34,6 +34,10 @@ namespace Application.Dtos
         //[JsonProperty(PropertyName = "project")]     
         public int ProjectId { get; set; }
 
+        public string UserFullName { get; set; }
+
+        public string ProjectName { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errors = new List<ValidationResult>();
