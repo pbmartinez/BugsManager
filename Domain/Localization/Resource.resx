@@ -201,8 +201,14 @@
   <data name="display_DetailsOf" xml:space="preserve">
     <value>Details of {0}</value>
   </data>
+  <data name="display_GraphicTitle" xml:space="preserve">
+    <value>Bugs by Project</value>
+  </data>
   <data name="display_ListOfXXX" xml:space="preserve">
     <value>List of {0}</value>
+  </data>
+  <data name="display_PieTitle" xml:space="preserve">
+    <value>Proportion by Project (%)</value>
   </data>
   <data name="display_Search" xml:space="preserve">
     <value>Find ...</value>

@@ -15,36 +15,50 @@
 <MudGrid>
     <MudItem xs="12" sm="6" md="3">
         <SimpleCard Title=@Localizer[Resource.BugDtos] Value=@TotalBugs.ToString()
-                    MudIcon=@Icons.Material.Filled.BugReport Color=@Color.Error>
+                    MudIcon=@Icons.Material.Filled.BugReport Color=@MudBlazor.Color.Error>
         </SimpleCard>
     </MudItem>
 
     <MudItem xs="12" sm="6" md="3">
         <SimpleCard Title=@Localizer[Resource.ProjectDtos] Value=@TotalProjects.ToString()
-                    MudIcon=@Icons.Material.Filled.Plumbing Color=@Color.Success>
+                    MudIcon=@Icons.Material.Filled.Plumbing Color=@MudBlazor.Color.Success>
         </SimpleCard>
     </MudItem>
 
     <MudItem xs="12" sm="6" md="3">
         <SimpleCard Title=@Localizer[Resource.UserDtos] Value=@UnnavailableUsers.ToString()
-                    MudIcon=@Icons.Material.Filled.VerifiedUser Color=@Color.Info>
+                    MudIcon=@Icons.Material.Filled.VerifiedUser Color=@MudBlazor.Color.Info>
         </SimpleCard>
     </MudItem>
 
     <MudItem xs="12" sm="6" md="3">
         <SimpleCard Title=@Localizer[Resource.UserDtos] Value=@AvailableUsers.ToString()
-                    MudIcon=@Icons.Material.Filled.SupervisedUserCircle Color=@Color.Warning>
+                    MudIcon=@Icons.Material.Filled.SupervisedUserCircle Color=@MudBlazor.Color.Warning>
         </SimpleCard>
     </MudItem>
 
-    <MudItem xs="12" sm="8">
-        <MudPaper Class="pa-4" Style="height:300px;">
-            Charts comming soon ish...
+    <MudItem xs="12" sm="6" md="6">
+        <MudPaper Class="pa-4" Style="height:500px;">
+            @if (Projects == null || Projects.Count == 0)
+            {
+                <MudProgressCircular Indeterminate=true Color="MudBlazor.Color.Info" Size="Size.Large"></MudProgressCircular>
+            }
+            else
+            {
+                <GraphicChart Projects="@Projects"></GraphicChart>
+            }
         </MudPaper>
     </MudItem>
-    <MudItem xs="12" sm="4">
-        <MudPaper Class="pa-4" Style="height:300px;">
-            Charts comming soon ish...
+    <MudItem xs="12" sm="6" md="6">
+        <MudPaper Class="pa-4" Style="height:500px;">
+            @if (Projects == null || Projects.Count == 0)
+            {
+                <MudProgressCircular Indeterminate=true Color="MudBlazor.Color.Info" Size="Size.Large"></MudProgressCircular>
+            }
+            else
+            {
+                <PieChart Projects="@Projects" Total="@Projects.Sum(p=>p.Bugs.Count)"></PieChart>
+            }
         </MudPaper>
     </MudItem>
 
@@ -62,8 +76,7 @@
     {
         Users = (await httpClient.GetFromJsonAsync<List<UserDto>>("/user")) ?? new List<UserDto>();
         Bugs = (await httpClient.GetFromJsonAsync<List<BugDto>>("/bug")) ?? new List<BugDto>();
-        Projects = (await httpClient.GetFromJsonAsync<List<ProjectDto>>("/project")) ?? new List<ProjectDto>();
-
+        Projects = (await httpClient.GetFromJsonAsync<List<ProjectDto>>("/project?Fields=Id,Name,Description,Bugs&Includes=Bugs")) ?? new List<ProjectDto>();
         TotalBugs = Bugs.Count;
         TotalProjects = Projects.Count;
         AvailableUsers = Users.Count - TotalBugs;

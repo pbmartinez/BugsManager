@@ -313,11 +313,29 @@ namespace Domain.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bugs by Project.
+        /// </summary>
+        public static string display_GraphicTitle {
+            get {
+                return ResourceManager.GetString("display_GraphicTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List of {0}.
         /// </summary>
         public static string display_ListOfXXX {
             get {
                 return ResourceManager.GetString("display_ListOfXXX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proportion by Project (%).
+        /// </summary>
+        public static string display_PieTitle {
+            get {
+                return ResourceManager.GetString("display_PieTitle", resourceCulture);
             }
         }
         

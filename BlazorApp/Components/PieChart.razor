@@ -1,0 +1,29 @@
+﻿@using Application.Dtos
+@using Domain.Interfaces
+@using Domain.Localization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Resource> Localizer
+
+<ApexChart TItem="ProjectDto"
+           Title="@Localizer[Resource.display_PieTitle]">
+    <ApexPointSeries TItem="ProjectDto"
+                     Items="@Projects"
+                     Name="Percentage"
+                     XValue="@(e => e.Name)"
+                     YAggregate="@(e => e.Sum(p => p.Bugs.Count == 0 || Total == 0m ? 0m:  Math.Round(p.Bugs.Count/Total*100m , 2) ))"
+                     SeriesType="SeriesType.Pie" />
+</ApexChart>
+
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public List<ProjectDto> Projects { get; set; } = null!;
+    [Parameter]
+    public decimal Total { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+}

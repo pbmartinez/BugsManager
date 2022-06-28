@@ -37,28 +37,28 @@
 
             @if (ShowMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
-                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="MudBlazor.Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
+                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="MudBlazor.Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
             }
             @if (AddMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="AddAsync" Variant="Variant.Filled" Color="Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="AddAsync" Variant="Variant.Filled" Color="MudBlazor.Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
             }
             @if (EditMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="Color.Info">@Localizer[Resource.btn_Details]</MudButton>
-                <MudButton OnClick="EditAsync" Variant="Variant.Filled" Color="Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
-                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="MudBlazor.Color.Info">@Localizer[Resource.btn_Details]</MudButton>
+                <MudButton OnClick="EditAsync" Variant="Variant.Filled" Color="MudBlazor.Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
+                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="MudBlazor.Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
             }
             @if (DeleteMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="Color.Info">@Localizer[Resource.btn_Details]</MudButton>
-                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
-                <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="MudBlazor.Color.Info">@Localizer[Resource.btn_Details]</MudButton>
+                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="MudBlazor.Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
+                <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="MudBlazor.Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
             }
         </MudForm>
     </MudCardContent>

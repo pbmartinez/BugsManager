@@ -19,7 +19,7 @@
         <MudForm @bind-IsValid="@success">
             <MudGrid>
                 <MudItem xs="12" sm="6">                    
-                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoUserId] HelperText=@Localizer[Resource.BugDtoUserId] OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="Color.Primary" 
+                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoUserId] HelperText=@Localizer[Resource.BugDtoUserId] OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="MudBlazor.Color.Primary" 
                                 Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoUserId]  Immediate="true" Strict="true"    
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
                         @foreach (var item in Users)
@@ -29,7 +29,7 @@
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="12" sm="6">                    
-                    <MudSelect T="int" @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoProjectId] HelperText=@Localizer[Resource.BugDtoProjectId] OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="Color.Primary" 
+                    <MudSelect T="int" @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoProjectId] HelperText=@Localizer[Resource.BugDtoProjectId] OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="MudBlazor.Color.Primary" 
                                 Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoProjectId] Immediate="true" Strict="true"           
                                 Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
                         @foreach (var item in Projects)
@@ -51,28 +51,28 @@
 
             @if (ShowMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
-                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="MudBlazor.Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
+                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="MudBlazor.Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
             }
             @if (AddMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="AddAsync" Variant="Variant.Filled" Color="Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="AddAsync" Variant="Variant.Filled" Color="MudBlazor.Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
             }
             @if (EditMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="Color.Info">@Localizer[Resource.btn_Details]</MudButton>
-                <MudButton OnClick="EditAsync" Variant="Variant.Filled" Color="Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
-                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="MudBlazor.Color.Info">@Localizer[Resource.btn_Details]</MudButton>
+                <MudButton OnClick="EditAsync" Variant="Variant.Filled" Color="MudBlazor.Color.Success" Disabled="@(!success)">@Localizer[Resource.btn_Save]</MudButton>
+                <MudButton OnClick="ChangeToDeleteMode" Variant="Variant.Filled" Color="MudBlazor.Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
             }
             @if (DeleteMode)
             {
-                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
-                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="Color.Info">@Localizer[Resource.btn_Details]</MudButton>
-                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
-                <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
+                <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="MudBlazor.Color.Default">@Localizer[Resource.btn_Cancel]</MudButton>
+                <MudButton OnClick="ChangeToShowMode" Variant="Variant.Filled" Color="MudBlazor.Color.Info">@Localizer[Resource.btn_Details]</MudButton>
+                <MudButton OnClick="ChangeToEditMode" Variant="Variant.Filled" Color="MudBlazor.Color.Warning">@Localizer[Resource.btn_Edit]</MudButton>
+                <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="MudBlazor.Color.Error">@Localizer[Resource.btn_Delete]</MudButton>
             }
         </MudForm>
     </MudCardContent>

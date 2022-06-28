@@ -16,7 +16,7 @@
         <MudTextField @bind-Value="searchString" Placeholder=@Localizer[Resource.display_Search] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         <MudSpacer />
         <MudTooltip Text=@Localizer[Resource.btn_Add] >
-            <MudIconButton @onclick="@Add" Icon="@Icons.Material.Filled.Add" Color=Color.Inherit ></MudIconButton>
+            <MudIconButton @onclick="@Add" Icon="@Icons.Material.Filled.Add" Color=@MudBlazor.Color.Inherit ></MudIconButton>
         </MudTooltip>
     </ToolBarContent>
     <ColGroup>
@@ -36,13 +36,13 @@
         <MudTd>@context.Description</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text=@Localizer[Resource.btn_Details]>
-                <MudFab @onclick="@(()=>Show(context))" Color=Color.Default Icon="@Icons.Material.Filled.Visibility" Size=Size.Small> </MudFab>
+                <MudFab @onclick="@(()=>Show(context))" Color=@MudBlazor.Color.Default Icon="@Icons.Material.Filled.Visibility" Size=Size.Small> </MudFab>
             </MudTooltip>
             <MudTooltip Text=@Localizer[Resource.btn_Edit]>
-                <MudFab @onclick="@(()=>Edit(context))" Color=Color.Warning Icon="@Icons.Material.Filled.Edit" Size=Size.Small> </MudFab>
+                <MudFab @onclick="@(()=>Edit(context))" Color=@MudBlazor.Color.Warning Icon="@Icons.Material.Filled.Edit" Size=Size.Small> </MudFab>
             </MudTooltip>
             <MudTooltip Text=@Localizer[Resource.btn_Delete]>
-                <MudFab @onclick="@(()=>Delete(context))" Color=Color.Error Icon="@Icons.Material.Filled.Delete" Size=Size.Small> </MudFab>
+                <MudFab @onclick="@(()=>Delete(context))" Color=@MudBlazor.Color.Error Icon="@Icons.Material.Filled.Delete" Size=Size.Small> </MudFab>
             </MudTooltip>
         </MudTd>
     </RowTemplate>
