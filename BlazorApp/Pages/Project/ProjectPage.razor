@@ -29,6 +29,7 @@
         <MudTh><MudTableSortLabel SortBy="new Func<ProjectDto, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<ProjectDto, object>(x=>x.Name)">@Localizer[Resource.ProjectDtoName]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<ProjectDto, object>(x=>x.Description)">@Localizer[Resource.ProjectDtoDescription]</MudTableSortLabel></MudTh>
+        <MudTh>@Localizer[Resource.display_Actions]</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Id">@context.Id</MudTd>

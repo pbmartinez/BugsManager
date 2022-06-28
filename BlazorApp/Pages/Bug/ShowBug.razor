@@ -16,12 +16,14 @@
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudForm @bind-IsValid="@success">
+        <MudForm @bind-IsValid="@success" @bind-Errors="@errors">
             <MudGrid>
                 <MudItem xs="12" sm="6">                    
-                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoUserId] HelperText=@Localizer[Resource.BugDtoUserId] OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="MudBlazor.Color.Primary" 
+                    <MudSelect T="int" @bind-Value="@(item.UserId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoUserId] OpenIcon="@Icons.Material.Filled.VerifiedUser" AdornmentColor="MudBlazor.Color.Primary" 
                                 Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoUserId]  Immediate="true" Strict="true"    
-                                Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
+                                Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" 
+                                Validation="@(new Func<int, IEnumerable<string>>(CheckUserId))"
+                                SelectedValues="@selectedUser">
                         @foreach (var item in Users)
                         {
                             <MudSelectItem T="int" Value="@item.Id" >@($"{item.Name} {item.SurName}")</MudSelectItem>
@@ -29,9 +31,11 @@
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="12" sm="6">                    
-                    <MudSelect T="int" @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoProjectId] HelperText=@Localizer[Resource.BugDtoProjectId] OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="MudBlazor.Color.Primary" 
-                                Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoProjectId] Immediate="true" Strict="true"           
-                                Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" >
+                    <MudSelect T="int" @bind-Value="@(item.ProjectId)" Disabled=@(disabled) Label=@Localizer[Resource.BugDtoProjectId] OpenIcon="@Icons.Material.Filled.Plumbing" AdornmentColor="MudBlazor.Color.Primary" 
+                                Margin="Margin.Normal" Placeholder=@Localizer[Resource.BugDtoProjectId]  Immediate="true" Strict="true"          
+                                Required="true" RequiredError="@Localizer[Resource.validation_FieldRequired]" 
+                                Validation="@(new Func<int, IEnumerable<string>>(CheckProjectId))"
+                                SelectedValues="@selectedProject">
                         @foreach (var item in Projects)
                         {
                             <MudSelectItem T="int"  Value="@item.Id">@(item.Name)</MudSelectItem>
@@ -79,6 +83,9 @@
 </MudCard>
 
 @code {
+    string[] errors = { };
+    List<int> selectedUser = new List<int>();
+    List<int> selectedProject = new List<int>();
     public List<UserDto> Users = new List<UserDto>();
     public List<ProjectDto> Projects = new List<ProjectDto>();
 
@@ -139,6 +146,10 @@
     {
         Users = (await Http.GetFromJsonAsync<List<UserDto>>("/user/available")) ?? new List<UserDto>();
         Projects = (await Http.GetFromJsonAsync<List<ProjectDto>>("/project")) ?? new List<ProjectDto>();
+        if (Users.Count > 0)
+            selectedUser = new List<int> { Users.First().Id };
+        if (Projects.Count > 0)
+            selectedProject = new List<int> { Projects.First().Id };
     }
 
     private void Cancel()
@@ -232,5 +243,20 @@
         ShowMode = false;
         AddMode = true;
         UpdateCardHeader();
+    }
+
+    private List<string> CheckUserId(int userId)
+    {
+        var errors = new List<string>();
+        if (userId <= 0)
+            errors.Add(Localizer[Resource.validation_FieldRequired]);
+        return errors;
+    }
+    private List<string> CheckProjectId(int projectId)
+    {
+        var errors = new List<string>();
+        if (projectId <= 0)
+            errors.Add(Localizer[Resource.validation_FieldRequired]);
+        return errors;    
     }
 }

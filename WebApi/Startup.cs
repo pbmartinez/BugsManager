@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using Hellang.Middleware.ProblemDetails;
 using Infrastructure.DependencyInjectionExtensions;
 using Infrastructure.Domain.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
@@ -16,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Filters;
 using WebApi.WellKnownNames;
 
 namespace WebApi
@@ -35,6 +37,7 @@ namespace WebApi
             services.AddMvc(options =>
             {
                 options.ReturnHttpNotAcceptable = true;
+                options.Filters.Add(new CheckHttpMethodFilter());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -54,7 +57,7 @@ namespace WebApi
                     }
                 });
             });
-
+            services.AddProblemDetails();
 
             services.AddAutoMapperWithProfiles();
             services.AddEntitiesServicesAndRepositories();
@@ -72,15 +75,8 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-            
+
+            app.UseProblemDetails();
             app.UseHttpsRedirection();
             app.UseCors(options => {
                 options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();

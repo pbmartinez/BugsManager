@@ -20,23 +20,24 @@
             <MudIconButton @onclick="@Add" Icon="@Icons.Material.Filled.Add" Color=@MudBlazor.Color.Inherit ></MudIconButton>
         </MudTooltip>
     </ToolBarContent>
-    <ColGroup>
+@*    <ColGroup>
         <col style="width:10%;" />
         <col style="width:20%;" />
         <col style="width:50%;" />
         <col style="width:20%;" />
-    </ColGroup>
+    </ColGroup>*@
     <HeaderContent>
         <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.UserId)">@Localizer[Resource.BugDtoUserId]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.ProjectId)">@Localizer[Resource.BugDtoProjectId]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.Description)">@Localizer[Resource.BugDtoDescription]</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<BugDto, object>(x=>x.CreationDate)">@Localizer[Resource.BugDtoCreationDate]</MudTableSortLabel></MudTh>
+        <MudTh>@Localizer[Resource.display_Actions]</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd>@context.Id</MudTd>
-        <MudTd>@context.UserId</MudTd>
-        <MudTd>@context.ProjectId</MudTd>
+        <MudTd>@context.UserFullName</MudTd>
+        <MudTd>@context.ProjectName</MudTd>
         <MudTd>@context.Description</MudTd>
         <MudTd>@context.CreationDate</MudTd>
         <MudTd DataLabel="">
@@ -146,7 +147,7 @@
 
     private async Task UpdateGridAsync()
     {
-        Elements = (await httpClient.GetFromJsonAsync<List<BugDto>>("/bug")) ?? new List<BugDto>();        
+        Elements = (await httpClient.GetFromJsonAsync<List<BugDto>>("/bug?Includes=User,Project")) ?? new List<BugDto>();        
     }
 
     private void OnCancelled()

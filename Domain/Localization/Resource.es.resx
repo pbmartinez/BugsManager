@@ -213,6 +213,12 @@
   <data name="display_Search" xml:space="preserve">
     <value>Buscar ...</value>
   </data>
+  <data name="display_UsersAvailable" xml:space="preserve">
+    <value>Disponibles</value>
+  </data>
+  <data name="display_UsersHooked" xml:space="preserve">
+    <value>Asignados</value>
+  </data>
   <data name="display_Welcome" xml:space="preserve">
     <value>Bienvenido</value>
   </data>

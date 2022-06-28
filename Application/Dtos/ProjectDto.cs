@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Application.Dtos
@@ -11,9 +12,10 @@ namespace Application.Dtos
         {
             Bugs = new HashSet<BugDto>();
         }
+        [Required]
+        public string Name { get; set; }
 
-        public string Name { get; set; } 
-
+        [Required]
         public string Description { get; set; }
 
         

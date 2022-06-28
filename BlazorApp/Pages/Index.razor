@@ -26,13 +26,13 @@
     </MudItem>
 
     <MudItem xs="12" sm="6" md="3">
-        <SimpleCard Title=@Localizer[Resource.UserDtos] Value=@UnnavailableUsers.ToString()
+        <SimpleCard Title=@Localizer[Resource.display_UsersHooked] Value=@UnnavailableUsers.ToString()
                     MudIcon=@Icons.Material.Filled.VerifiedUser Color=@MudBlazor.Color.Info>
         </SimpleCard>
     </MudItem>
 
     <MudItem xs="12" sm="6" md="3">
-        <SimpleCard Title=@Localizer[Resource.UserDtos] Value=@AvailableUsers.ToString()
+        <SimpleCard Title=@Localizer[Resource.display_UsersAvailable] Value=@AvailableUsers.ToString()
                     MudIcon=@Icons.Material.Filled.SupervisedUserCircle Color=@MudBlazor.Color.Warning>
         </SimpleCard>
     </MudItem>
