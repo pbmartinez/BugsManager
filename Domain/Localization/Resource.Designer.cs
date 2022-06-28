@@ -349,6 +349,24 @@ namespace Domain.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        public static string display_UsersAvailable {
+            get {
+                return ResourceManager.GetString("display_UsersAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Asigned.
+        /// </summary>
+        public static string display_UsersHooked {
+            get {
+                return ResourceManager.GetString("display_UsersHooked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome.
         /// </summary>
         public static string display_Welcome {
