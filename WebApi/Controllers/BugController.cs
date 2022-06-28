@@ -19,6 +19,7 @@ namespace WebApi.Controllers
 
     [ApiController]
     [Route("bug")]
+    [CheckHttpMethodFilter]
     public class BugController : ApiBaseController<BugDto, int>
     {
         private readonly IBugAppService _BugAppService;
@@ -52,6 +53,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetBugs([FromQuery] QueryStringParameters queryStringParameters,
             [FromQuery] BugQueryStringParameters bugQuery)
         {
+            throw new System.Exception("Cualquier cosa");
             if (!bugQuery.IsValid)
                 return BadRequest();
             var bugsByUser = new BugsByUserSpecification(_mapper, bugQuery.UserId);
@@ -64,22 +66,24 @@ namespace WebApi.Controllers
             return Ok(bugs);
         }
 
-        [HttpPost][HttpPut][HttpPatch][HttpDelete]
+        [HttpPost]
+        [HttpPut]
+        [HttpPatch]
+        [HttpDelete]
         [Route("~/bugs", Order = 2)]
-        public IActionResult Get()
+        public IActionResult Post()
         {
+            Response.Headers.Add("Allow", "GET,OPTIONS");
             return StatusCode(StatusCodes.Status405MethodNotAllowed);
         }
 
-        [HttpPost]
-        public override async Task<IActionResult> Post(BugDto item)
+        [HttpOptions]
+        [Route("~/bugs")]
+        public IActionResult Options()
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            if (item.IsTransient())
-                item.GenerateIdentity();
-            var result = await AppService.AddAsync(item);
-            return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
+            Response.Headers.Add("Allow", "GET,OPTIONS");
+            return Ok();
         }
+
     }
 }
