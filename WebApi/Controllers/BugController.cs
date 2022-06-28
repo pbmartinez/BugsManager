@@ -53,7 +53,6 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetBugs([FromQuery] QueryStringParameters queryStringParameters,
             [FromQuery] BugQueryStringParameters bugQuery)
         {
-            throw new System.Exception("Cualquier cosa");
             if (!bugQuery.IsValid)
                 return BadRequest();
             var bugsByUser = new BugsByUserSpecification(_mapper, bugQuery.UserId);
