@@ -183,8 +183,12 @@
             return true;
         if (element.CreationDate.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
+        if (element.UserFullName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.ProjectName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
         
-        if ($"{element.Id} {element.UserId} {element.ProjectId} {element.Description} {element.CreationDate.ToString()}".Contains(searchString))
+        if ($"{element.Id} {element.UserFullName} {element.ProjectName} {element.UserId} {element.ProjectId} {element.Description} {element.CreationDate.ToString()}".Contains(searchString))
             return true;
         return false;
     }
