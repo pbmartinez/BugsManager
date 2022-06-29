@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using WebApi.Helpers;
 using WebApi.Parameters;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {    
@@ -95,10 +97,16 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [ValidationProblemDetailsFilter]
+
         public virtual async Task<IActionResult> Post(TEntityDto item)
         {
+            ModelState.AddModelError("Campo 2", "Errores en el campo 23");
+            ModelState.AddModelError("Campo 2", "Otro error en en el campo 23");
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            {
+                return BadRequest();
+            }
             if (item.IsTransient())
                 item.GenerateIdentity();
             var result = await AppService.AddAsync(item);
